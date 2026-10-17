@@ -1,0 +1,552 @@
+
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVA Academy | Bilik gələcəyindir</title>
+<style>
+:root {
+  --bg: #0b1020;
+  --card: #151d32;
+  --blue: #5875ff;
+  --green: #35d39a;
+  --text: #f4f7ff;
+  --muted: #aab5ce;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 7%;
+  border-bottom: 1px solid #27304a;
+}
+.logo { font-size: 25px; font-weight: 800; }
+.logo span { color: var(--blue); }
+nav { display: flex; gap: 22px; }
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+}
+nav a:hover { color: white; }
+.hero {
+  padding: 75px 7% 55px;
+  text-align: center;
+  background: radial-gradient(ellipse at top, #202e61, var(--bg) 70%);
+}
+.tag {
+  display: inline-block;
+  color: var(--green);
+  border: 1px solid #286c5b;
+  border-radius: 30px;
+  padding: 8px 14px;
+  font-size: 13px;
+}
+h1 {
+  font-size: clamp(36px, 6vw, 64px);
+  margin: 24px auto 15px;
+  max-width: 800px;
+  line-height: 1.1;
+}
+h1 span { color: #7890ff; }
+.hero p {
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+.btn {
+  background: var(--blue);
+  color: white;
+  border: 0;
+  padding: 13px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn:hover { filter: brightness(1.13); }
+.hero .btn { margin-top: 25px; }
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 45px;
+  padding: 25px 10px 40px;
+  flex-wrap: wrap;
+}
+.stat strong { display: block; font-size: 23px; }
+.stat small { color: var(--muted); }
+section { padding: 40px 7%; }
+.section-title { font-size: 30px; margin-bottom: 8px; }
+.section-sub { color: var(--muted); margin-bottom: 25px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid #28334f;
+  border-radius: 16px;
+  padding: 22px;
+  transition: transform .2s, border-color .2s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--blue);
+}
+.subject-icon { font-size: 32px; }
+.card h3 { margin: 14px 0 8px; }
+.card p { color: var(--muted); font-size: 14px; line-height: 1.6; }
+.card .btn { width: 100%; margin-top: 10px; }
+#test-area { display: none; }
+.quiz {
+  background: var(--card);
+  border: 1px solid #28334f;
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 720px;
+}
+.quiz-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.progress {
+  height: 6px;
+  background: #2b3550;
+  border-radius: 10px;
+  margin: 18px 0;
+  overflow: hidden;
+}
+#progress-bar {
+  width: 0%;
+  height: 100%;
+  background: var(--green);
+  transition: width .2s;
+}
+#question { line-height: 1.6; }
+.answers { display: grid; gap: 10px; margin: 20px 0; }
+.answer {
+  padding: 14px;
+  border: 1px solid #34405e;
+  border-radius: 10px;
+  color: var(--text);
+  background: #10172a;
+  cursor: pointer;
+  text-align: left;
+}
+.answer:hover { border-color: var(--blue); }
+.answer.selected { border-color: var(--blue); background: #25345f; }
+.answer.correct { border-color: var(--green); }
+.answer.wrong { border-color: #ff6b7b; }
+#feedback { min-height: 24px; color: var(--muted); }
+.result {
+  text-align: center;
+  padding: 25px 0;
+}
+.result .score { font-size: 46px; color: var(--green); font-weight: bold; }
+footer {
+  border-top: 1px solid #27304a;
+  color: var(--muted);
+  text-align: center;
+  padding: 25px;
+  font-size: 13px;
+}
+@media (max-width: 800px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  nav { gap: 12px; }
+}
+@media (max-width: 520px) {
+  header { padding: 18px 5%; }
+  nav a { font-size: 12px; }
+  nav { gap: 9px; }
+  .hero { padding: 55px 5% 35px; }
+  section { padding: 32px 5%; }
+  .grid { grid-template-columns: 1fr; }
+  .stats { gap: 24px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">NOVA<span> ACADEMY</span></div>
+  <nav>
+    <a href="#home">Ana səhifə</a>
+    <a href="#subjects">Fənlər</a>
+    <a href="#test-area">Testlər</a>
+  </nav>
+</header>
+
+<main>
+  <div class="hero" id="home">
+    <span class="tag">✦ Öyrən. Sına. Uğur qazan.</span>
+    <h1>Bilik gələcəyindir.<br><span>Uğura indi başla!</span></h1>
+    <p>NOVA Academy ilə biliklərini yoxla, nəticələrini gör və imtahanlara daha inamlı hazırlaş.</p>
+    <button class="btn" onclick="document.getElementById('subjects').scrollIntoView({behavior:'smooth'})">
+      Testlərə başla →
+    </button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><strong>4</strong><small>Fənn bölməsi</small></div>
+    <div class="stat"><strong>10+</strong><small>Nümunə sual</small></div>
+    <div class="stat"><strong>100%</strong><small>Öyrənməyə fokus</small></div>
+  </div>
+
+  <section id="subjects">
+    <h2 class="section-title">Fənnini seç</h2>
+    <p class="section-sub">Bir fənn seç və biliyini sına.</p>
+    <div class="grid">
+      <div class="card">
+        <div class="subject-icon">📚</div>
+        <h3>Azərbaycan dili</h3>
+        <p>Qrammatika və dil qaydaları üzrə testlər.</p>
+        <button class="btn" onclick="startTest('az')">Testə başla</button>
+      </div>
+      <div class="card">
+        <div class="subject-icon">📖</div>
+        <h3>Ədəbiyyat</h3>
+        <p>Ədəbi əsərlər və yazıçılar üzrə suallar.</p>
+        <button class="btn" onclick="startTest('ed')">Testə başla</button>
+      </div>
+      <div class="card">
+        <div class="subject-icon">🔢</div>
+        <h3>Riyaziyyat</h3>
+        <p>Məntiqi düşünmə və hesablama sualları.</p>
+        <button class="btn" onclick="startTest('riy')">Testə başla</button>
+      </div>
+      <div class="card">
+        <div class="subject-icon">🌍</div>
+        <h3>İngilis dili</h3>
+        <p>İngilis dili üzrə ilkin biliklərini yoxla.</p>
+        <button class="btn" onclick="startTest('en')">Testə başla</button>
+      </div>
+   
+<div class="card">
+  <div class="subject-icon">🏛️</div>
+  <h3>Tarix</h3>
+  <p>Tarixi hadisələr və şəxsiyyətlər.</p>
+  <button class="btn" onclick="startTest('tarix')">Testə başla</button>
+</div>
+
+<div class="card">
+  <div class="subject-icon">🌍</div>
+  <h3>Coğrafiya</h3>
+  <p>Materiklər, okeanlar və xəritələr.</p>
+  <button class="btn" onclick="startTest('cografiya')">Testə başla</button>
+</div>
+
+<div class="card">
+  <div class="subject-icon">💻</div>
+  <h3>İnformatika</h3>
+  <p>Kompüter və informasiya texnologiyaları.</p>
+  <button class="btn" onclick="startTest('informatika')">Testə başla</button>
+</div>
+
+<div class="card">
+  <div class="subject-icon">🧬</div>
+  <h3>Biologiya</h3>
+  <p>Canlılar və təbiət haqqında biliklər.</p>
+  <button class="btn" onclick="startTest('biologiya')">Testə başla</button>
+</div>
+
+<div class="card">
+  <div class="subject-icon">⚛️</div>
+  <h3>Fizika</h3>
+  <p>Hərəkət, qüvvə və enerji.</p>
+  <button class="btn" onclick="startTest('fizika')">Testə başla</button>
+</div>
+
+<div class="card">
+  <div class="subject-icon">🧪</div>
+  <h3>Kimya</h3>
+  <p>Maddələr və onların xassələri.</p>
+  <button class="btn" onclick="startTest('kimya')">Testə başla</button>
+</div>
+
+<div class="card">
+  <div class="subject-icon">🏛️</div>
+  <h3>Tarix</h3>
+  <p>Tarixi hadisələr və şəxsiyyətlər.</p>
+  <button class="btn" onclick="startTest('tarix')">Testə başla</button>
+</div>
+
+<div class="card">
+  <div class="subject-icon">🌍</div>
+  <h3>Coğrafiya</h3>
+  <p>Materiklər və okeanlar.</p>
+  <button class="btn" onclick="startTest('cografiya')">Testə başla</button>
+</div>
+
+<div class="card">
+  <div class="subject-icon">💻</div>
+  <h3>İnformatika</h3>
+  <p>Kompüter və informasiya texnologiyaları.</p>
+  <button class="btn" onclick="startTest('informatika')">Testə başla</button>
+</div>
+
+<div class="card">
+  <div class="subject-icon">🧬</div>
+  <h3>Biologiya</h3>
+  <p>Canlılar və təbiət.</p>
+  <button class="btn" onclick="startTest('biologiya')">Testə başla</button>
+</div>
+
+<div class="card">
+  <div class="subject-icon">⚛️</div>
+  <h3>Fizika</h3>
+  <p>Hərəkət, qüvvə və enerji.</p>
+  <button class="btn" onclick="startTest('fizika')">Testə başla</button>
+</div>
+
+<div class="card">
+  <div class="subject-icon">🧪</div>
+  <h3>Kimya</h3>
+  <p>Maddələr və onların xassələri.</p>
+  <button class="btn" onclick="startTest('kimya')">Testə başla</button>
+</div>
+ </div>
+  </section>
+
+  <section id="test-area">
+    <h2 class="section-title" id="quiz-title">Test</h2>
+    <p class="section-sub">Cavabını seç və növbəti suala keç.</p>
+    <div class="quiz" id="quiz">
+      <div class="quiz-top">
+        <span id="counter">Sual 1</span>
+        <span id="subject-name">NOVA Academy</span>
+      </div>
+      <div class="progress"><div id="progress-bar"></div></div>
+      <h3 id="question"></h3>
+      <div class="answers" id="answers"></div>
+      <p id="feedback" aria-live="polite"></p>
+      <button class="btn" id="next-btn" onclick="nextQuestion()" disabled>Növbəti sual →</button>
+    </div>
+    <div id="result" class="quiz result" style="display:none"></div>
+  </section>
+</main>
+
+<footer>
+  © <span id="year"></span> NOVA Academy · Bilik gələcəyindir.
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const tests = {
+
+  az: {
+    name: "Azərbaycan dili",
+    questions: [
+      { q: "Hansı söz isimdir?", a: ["Gözəl", "Kitab", "Qaçmaq", "Tez"], c: 1 },
+      { q: "Cümlənin baş üzvləri hansılardır?", a: ["Təyin və tamamlıq", "Mübtəda və xəbər", "Zərflik və təyin", "Tamamlıq və xəbər"], c: 1 },
+      { q: "Hansı söz sifətdir?", a: ["Məktəb", "Oxumaq", "Ağıllı", "Dünən"], c: 2 },
+      { q: "Hansı söz əvəzlikdir?", a: ["Mən", "Kitab", "Gözəl", "Beş"], c: 0 },
+      { q: "Hansı söz zərfdir?", a: ["Sürətlə", "Dəftər", "Yaşıl", "Oxumaq"], c: 0 }
+    ]
+  },
+  ed: {
+    name: "Ədəbiyyat",
+    questions: [
+      { q: "Kitabi-Dədə Qorqud hansı ədəbiyyat nümunəsidir?", a: ["Şifahi xalq ədəbiyyatı", "Elmi məqalə", "Müasir roman", "Xəbər"], c: 0 },
+      { q: "Şeirin misralarının birləşdiyi hissə necə adlanır?", a: ["Fəsil", "Bənd", "Abzas", "Səhnə"], c: 1 },
+      { q: "Ədəbiyyatda bədii obraz nədir?", a: ["Bədii təsvir vasitəsilə yaradılan surət", "Riyazi düstur", "Xəritə", "Cədvəl"], c: 0 },
+      { q: "Nağıl hansı janra aiddir?", a: ["Elmi məqalə", "Rəsmi sənəd", "Şifahi xalq ədəbiyyatı", "Ərizə"], c: 2 },
+      { q: "Lirik əsərlərdə əsasən nə ifadə olunur?", a: ["Qanunlar", "Hiss və duyğular", "Riyazi hesablamalar", "Coğrafi məlumatlar"], c: 1 }
+    ]
+  },
+  riy: {
+    name: "Riyaziyyat",
+    questions: [
+      { q: "7 × 8 neçədir?", a: ["54", "56", "64", "48"], c: 1 },
+      { q: "144 : 12 neçədir?", a: ["10", "11", "12", "14"], c: 2 },
+      { q: "25 + 37 neçədir?", a: ["52", "62", "63", "72"], c: 1 },
+      { q: "9² neçədir?", a: ["18", "72", "81", "99"], c: 2 },
+      { q: "200-ün 25%-i neçədir?", a: ["25", "40", "50", "75"], c: 2 }
+    ]
+  },
+  en: {
+    name: "İngilis dili",
+    questions: [
+      { q: "Apple sözünün mənası nədir?", a: ["Armud", "Üzüm", "Alma", "Gavalı"], c: 2 },
+      { q: "Book sözünün cəmi hansıdır?", a: ["Bookes", "Books", "Bookies", "Book"], c: 1 },
+      { q: "I ___ a student.", a: ["am", "is", "are", "be"], c: 0 },
+      { q: "What is the opposite of 'big'?", a: ["Tall", "Small", "Long", "Fast"], c: 1 },
+      { q: "She ___ to school every day.", a: ["go", "going", "goes", "gone"], c: 2 }    ]
+  },
+  tarix: {
+    name: "Tarix",
+    questions: [
+      { q: "Azərbaycan Xalq Cümhuriyyəti nə vaxt yaradılıb?", a: ["1918-ci il", "1920-ci il", "1991-ci il", "1905-ci il"], c: 0 },
+      { q: "Azərbaycanın paytaxtı hansıdır?", a: ["Gəncə", "Şuşa", "Bakı", "Şamaxı"], c: 2 },
+      { q: "Azərbaycan dövlət müstəqilliyini nə vaxt bərpa edib?", a: ["1988-ci il", "1991-ci il", "1995-ci il", "2000-ci il"], c: 1 },
+      { q: "Qədim Misir hansı çayın vadisində yaranıb?", a: ["Amazon", "Nil", "Volqa", "Dunay"], c: 1 },
+      { q: "İkinci Dünya müharibəsi hansı ildə başa çatıb?", a: ["1941", "1943", "1945", "1950"], c: 2 }
+    ]
+  },
+  cografiya: {
+    name: "Coğrafiya",
+    questions: [
+      { q: "Dünyanın ən böyük okeanı hansıdır?", a: ["Atlantik", "Hind", "Şimal Buzlu", "Sakit"], c: 3 },
+      { q: "Azərbaycan hansı qitədə yerləşir?", a: ["Afrika", "Avrasiya", "Avstraliya", "Amerika"], c: 1 },
+      { q: "Yer kürəsinin təbii peyki hansıdır?", a: ["Mars", "Günəş", "Ay", "Venera"], c: 2 },
+      { q: "Ən böyük materik hansıdır?", a: ["Avrasiya", "Afrika", "Antarktida", "Avstraliya"], c: 0 },
+      { q: "Xəritədə məsafələrin kiçildilməsini nə göstərir?", a: ["İqlim", "Miqyas", "Relyef", "İstiqamət"], c: 1 }
+    ]
+  },
+  informatika: {
+    name: "İnformatika",
+    questions: [
+      { q: "Kompüterin əsas hesablama qurğusu hansıdır?", a: ["Monitor", "Klaviatura", "Prosessor", "Siçan"], c: 2 },
+      { q: "İkilik say sistemində hansı rəqəmlər işlədilir?", a: ["0 və 1", "1 və 2", "0-dan 9-a qədər", "2 və 3"], c: 0 },
+      { q: "HTML əsasən nə üçün istifadə olunur?", a: ["Veb səhifənin strukturunu yaratmaq", "Video çəkmək", "Kompüteri söndürmək", "Şəbəkəni təmir etmək"], c: 0 },
+      { q: "Klaviatura hansı qurğudur?", a: ["Çıxış", "Giriş", "Yaddaş", "Şəbəkə"], c: 1 },
+      { q: "Faylları saxlamaq üçün hansı qurğudan istifadə edilir?", a: ["Monitor", "Mikrofon", "SSD", "Dinamik"], c: 2 }
+    ]
+  },
+  biologiya: {
+    name: "Biologiya",
+    questions: [
+      { q: "Bitkilərdə fotosintez əsasən hansı orqanoiddə gedir?", a: ["Nüvədə", "Xloroplastda", "Ribosomda", "Vakuolda"], c: 1 },
+      { q: "İnsan ürəyində neçə kamera var?", a: ["2", "3", "4", "5"], c: 2 },
+      { q: "Canlıların ən kiçik quruluş vahidi hansıdır?", a: ["Orqan", "Hüceyrə", "Toxuma", "Sistem"], c: 1 },
+      { q: "İnsan nəfəs aldıqda əsasən hansı qazı qəbul edir?", a: ["Oksigen", "Hidrogen", "Helium", "Metan"], c: 0 },
+      { q: "Bitkilər suyu əsasən hansı orqanı ilə qəbul edir?", a: ["Çiçək", "Yarpaq", "Kök", "Meyvə"], c: 2 }
+    ]
+  },
+  fizika: {
+    name: "Fizika",
+    questions: [
+      { q: "Qüvvənin SI vahidi hansıdır?", a: ["Coul", "Nyuton", "Vatt", "Paskal"], c: 1 },
+      { q: "Sürət necə hesablanır?", a: ["Zaman × kütlə", "Yol / zaman", "Kütlə / həcm", "Qüvvə × zaman"], c: 1 },
+      { q: "Suyun normal atmosfer təzyiqində qaynama temperaturu neçədir?", a: ["0°C", "50°C", "100°C", "150°C"], c: 2 },
+      { q: "Elektrik cərəyanının vahidi hansıdır?", a: ["Amper", "Metr", "Kiloqram", "Saniyə"], c: 0 },
+      { q: "İşıq hansı mühitdə yayılmır?", a: ["Vakuumda", "Havada", "Suda", "Qaranlıqda deyil, işıq üçün maddi mühit tələb olunmur"], c: 3 }
+    ]
+  },
+  kimya: {
+    name: "Kimya",
+    questions: [
+      { q: "Suyun kimyəvi formulu hansıdır?", a: ["CO₂", "O₂", "H₂O", "NaCl"], c: 2 },
+      { q: "Oksigenin kimyəvi işarəsi hansıdır?", a: ["Ox", "O", "Og", "Om"], c: 1 },
+      { q: "Süfrə duzunun əsas kimyəvi formulu hansıdır?", a: ["NaCl", "HCl", "H₂O", "CO₂"], c: 0 },
+      { q: "Atomun mərkəzində nə yerləşir?", a: ["Elektron buludu", "Nüvə", "Molekul", "Hüceyrə"], c: 1 },
+      { q: "Karbon qazının formulu hansıdır?", a: ["CO₂", "H₂", "NaCl", "NH₃"], c: 0 }
+    ]
+  }
+};
+
+  
+let currentTest;
+let currentIndex = 0;
+let score = 0;
+let selected = null;
+let answered = false;
+
+function startTest(subject) {
+  currentTest = tests[subject];
+  currentIndex = 0;
+  score = 0;
+  document.getElementById("quiz-title").textContent = currentTest.name + " testi";
+  document.getElementById("quiz").style.display = "block";
+  document.getElementById("result").style.display = "none";
+  document.getElementById("test-area").style.display = "block";
+  document.getElementById("test-area").scrollIntoView({ behavior: "smooth" });
+  showQuestion();
+}
+
+function showQuestion() {
+  const item = currentTest.questions[currentIndex];
+  selected = null;
+  answered = false;
+  document.getElementById("counter").textContent =
+    "Sual " + (currentIndex + 1) + " / " + currentTest.questions.length;
+  document.getElementById("subject-name").textContent = currentTest.name;
+  document.getElementById("progress-bar").style.width =
+    (currentIndex / currentTest.questions.length * 100) + "%";
+  document.getElementById("question").textContent = item.q;
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("next-btn").disabled = true;
+  document.getElementById("next-btn").textContent =
+    currentIndex === currentTest.questions.length - 1 ? "Nəticəni gör →" : "Növbəti sual →";
+
+  const container = document.getElementById("answers");
+  container.innerHTML = "";
+  item.a.forEach((answer, index) => {
+    const button = document.createElement("button");
+    button.className = "answer";
+    button.textContent = String.fromCharCode(65 + index) + ") " + answer;
+    button.onclick = () => chooseAnswer(index, button);
+    container.appendChild(button);
+  });
+}
+
+function chooseAnswer(index, button) {
+  if (answered) return;
+  selected = index;
+  document.querySelectorAll(".answer").forEach(b => b.classList.remove("selected"));
+  button.classList.add("selected");
+  answered = true;
+
+  const item = currentTest.questions[currentIndex];
+  const buttons = document.querySelectorAll(".answer");
+  buttons[item.c].classList.add("correct");
+
+  if (index === item.c) {
+    score++;
+    document.getElementById("feedback").textContent = "✓ Düzgün cavab!";
+  } else {
+    button.classList.add("wrong");
+    document.getElementById("feedback").textContent =
+      "✗ Yanlış cavab. Düzgün cavab: " + item.a[item.c];
+  }
+  document.getElementById("next-btn").disabled = false;
+  document.getElementById("progress-bar").style.width =
+    ((currentIndex + 1) / currentTest.questions.length * 100) + "%";
+}
+
+function nextQuestion() {
+  if (!answered) return;
+  currentIndex++;
+  if (currentIndex < currentTest.questions.length) {
+    showQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  document.getElementById("quiz").style.display = "none";
+  const result = document.getElementById("result");
+  result.style.display = "block";
+  const total = currentTest.questions.length;
+  const percent = Math.round(score / total * 100);
+  result.innerHTML = `
+    <h2>Test tamamlandı!</h2>
+    <div class="score">${percent}%</div>
+    <p>${total} sualdan ${score} düzgün cavab verdin.</p>
+    <p>Yanlış cavabların sayı: ${total - score}</p>
+    <button class="btn" onclick="startTest('${Object.keys(tests).find(key => tests[key] === currentTest)}')">Yenidən işlə</button>
+    <button class="btn" style="margin-left:8px" onclick="backToSubjects()">Fənlərə qayıt</button>
+  `;
+}
+
+function backToSubjects() {
+  document.getElementById("test-area").style.display = "none";
+  document.getElementById("subjects").scrollIntoView({ behavior: "smooth" });
+}
+</script>
+</body>
+</html>
